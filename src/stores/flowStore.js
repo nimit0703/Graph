@@ -105,6 +105,13 @@ export const useFlowStore = defineStore('flowStore', () => {
     }
   };
 
+  const updateNodePosition = (nodeId, newPosition) => {
+    const nodeIndex = nodes.value.findIndex(node => node.id === nodeId);
+    if (nodeIndex !== -1) {
+      nodes.value[nodeIndex].position = newPosition;
+    }
+  }
+
   return {
     nodes,
     edges,
@@ -113,5 +120,6 @@ export const useFlowStore = defineStore('flowStore', () => {
     selectNode,
     addNode,
     deleteNode,
+    updateNodePosition
   };
 });
