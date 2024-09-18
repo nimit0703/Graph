@@ -1,0 +1,63 @@
+/* General styling for the custom cursor using an image */
+.custom-cursor {
+    position: absolute;
+    width: 60px; /* Adjust size to fit your image */
+    height: 60px;
+    pointer-events: none;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease-out;
+    display: none; /* Hidden by default */
+  }
+.custom-cursor-hero {
+    background: url("hero.png") no-repeat center center; /* Path to your image */
+    background-size: contain; /* Ensures the image fits within the div */
+  }
+.custom-cursor-supercat {
+    background: url("https://img.freepik.com/free-vector/dog-with-red-cape-flying_1308-89199.jpg?t=st=1726647525~exp=1726651125~hmac=22bacdfc45f18755d8a9d7ddfc6a04c9389ae71294e2a3ca6236891b7e4199d9&w=740") no-repeat center center; /* Path to your image */
+    background-size: contain; /* Ensures the image fits within the div */
+  }
+.custom-cursor-pineapple {
+    background: url("https://img.freepik.com/premium-vector/pineapple-tropical-sweet_165488-3921.jpg?w=740") no-repeat center center; /* Path to your image */
+    background-size: contain; /* Ensures the image fits within the div */
+  }
+  
+  /* Class to make the cursor visible on hover */
+  .custom-cursor-visible {
+    display: block;
+  }
+  
+  /* Pulsing effect for cursor hover */
+  .cursor-bubble:hover .custom-cursor {
+    animation: moveCursor1 0.5s infinite alternate;
+  }
+  
+  /* Click effect to expand the cursor */
+  .cursor-bubble-expand {
+    animation: moveCursor2 0.5s forwards;
+  }
+  
+  /* Animation for pulsing */
+  @keyframes moveCursor1 {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.8);
+    }
+  }
+  
+  /* Animation for expanding and disappearing */
+  @keyframes moveCursor2 {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(2);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  
