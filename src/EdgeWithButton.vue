@@ -95,10 +95,10 @@ export default {
       class="animated-edge-label"
     >
       <div class="row align-items-center">
-        <div class="col-auto text-white text-wrap" style="transform: rotate(-90deg); margin-bottom: 5px;"> <!-- Counter-rotate text for readability -->
+        <div class="col text-white text-wrap" style="transform: rotate(-90deg); margin-bottom: 5px;"> <!-- Counter-rotate text for readability -->
           {{ data.text }}
         </div>
-        <div class="col-auto w-100">
+        <div class="col w-100">
           <button class="edgebutton btn rounded" @click="removeEdges(id)">×</button> <!-- Button positioned below text -->
         </div>
       </div>

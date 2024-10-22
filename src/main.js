@@ -1,5 +1,7 @@
 
 import './assets/main.css'
+import '@vue-flow/controls/dist/style.css'
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 

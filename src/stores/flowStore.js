@@ -13,12 +13,18 @@ export const useFlowStore = defineStore("flowStore", () => {
 
   const edges = ref([]);
   const selectedNode = ref(null);
+  const selectedEdges = ref(null)
   const isButtonDisabled = ref(true);
 
   const selectNode = (nodeId) => {
     selectedNode.value = nodeId;
     isButtonDisabled.value = false;
   };
+
+  const deselectNode = () =>{
+    selectedNode.value = null;
+    isButtonDisabled.value = true;
+  }
 
   const addNode = () => {
     const newNodeId = (nodes.value.length + 1).toString();
@@ -31,15 +37,21 @@ export const useFlowStore = defineStore("flowStore", () => {
     nodes.value = [...nodes.value, newNode];
   };
 
+  const updateNode = (id,data) =>{
+    // find node from nodes and update it's data
+    const node = nodes.value.find((node) => node.id === id);
+    if (node) node.data = data;
+  }
+
   const deleteNode = () => {
     if (selectedNode.value) {
       nodes.value = nodes.value.filter(
-        (node) => node.id !== selectedNode.value
+        (node) => node.id !== selectedNode.value.id
       );
       edges.value = edges.value.filter(
         (edge) =>
-          edge.source !== selectedNode.value &&
-          edge.target !== selectedNode.value
+          edge.source !== selectedNode.value.id &&
+          edge.target !== selectedNode.value.id
       );
       selectedNode.value = null;
       isButtonDisabled.value = true;
@@ -73,5 +85,7 @@ export const useFlowStore = defineStore("flowStore", () => {
     deleteNode,
     updateNodePosition,
     connectNodes,
+    deselectNode,
+    updateNode
   };
 });
