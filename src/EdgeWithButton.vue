@@ -94,8 +94,8 @@ export default {
       }" 
       class="animated-edge-label"
     >
-      <div class="row align-items-center">
-        <div class="col text-white text-wrap" style="transform: rotate(-90deg); margin-bottom: 5px;"> <!-- Counter-rotate text for readability -->
+      <div class="d-flex align-items-center" style="transform: rotate(-90deg);">
+        <div class="col text-white text-wrap" style="transform: rotate(0deg); margin-bottom: 5px;"> <!-- Counter-rotate text for readability -->
           {{ data.text }}
         </div>
         <div class="col w-100">
@@ -126,7 +126,7 @@ export default {
   border: none; /* Remove border */
   color: white; /* Button text color */
   cursor: pointer; /* Pointer on hover */
-  font-size: 16px; /* Button font size */
+  font-size: 26px; /* Button font size */
   padding: 2px 5px; /* Padding for the button */
   margin-top: 5px; /* Space between text and button */
 }
