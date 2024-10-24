@@ -1,6 +1,6 @@
 <script setup>
-import { BaseEdge, EdgeLabelRenderer, getBezierPath, useVueFlow } from '@vue-flow/core'
-import { computed } from 'vue'
+import { BaseEdge, EdgeLabelRenderer, getBezierPath, useVueFlow } from '@vue-flow/core';
+import { computed, watch } from 'vue';
 
 const props = defineProps({
   id: {
@@ -39,24 +39,36 @@ const props = defineProps({
     type: Object,
     required: false,
   },
-})
+});
 
-const { removeEdges } = useVueFlow()
+const { removeEdges } = useVueFlow();
 
-const path = computed(() => getBezierPath(props))
-</script>
+const path = computed(() => getBezierPath(props));
 
-<script>
-export default {
-  inheritAttrs: false,
-}
+watch(
+  [() => props.sourceX, () => props.sourceY, () => props.targetX, () => props.targetY],
+  () => {
+    path.value = getBezierPath(props);
+  }
+);
+
+// Handler for edge click
+const handleEdgeClick = () => {
+  console.log(`Edge ${props.id} clicked`);
+  // Add any additional logic for edge selection here
+};
 </script>
 
 <template>
-  <!-- You can use the `BaseEdge` component to create your own custom edge more easily -->
-  <BaseEdge :id="id" :style="style" :path="path[0]" :marker-end="markerEnd" />
+  <!-- Updated BaseEdge with pointerEvents and stroke width -->
+  <BaseEdge
+    :id="id"
+    :path="path[0]"
+    :marker-end="markerEnd"
+    @click="handleEdgeClick"
+  />
 
-  <!-- Use the `EdgeLabelRenderer` to escape the SVG world of edges and render your own custom label in a `<div>` ctx -->
+  <!-- Custom label for removing the edge -->
   <EdgeLabelRenderer>
     <div
       :style="{
@@ -64,9 +76,22 @@ export default {
         position: 'absolute',
         transform: `translate(-50%, -50%) translate(${path[1]}px,${path[2]}px)`,
       }"
-      class="nodrag nopan"
+      class=""
     >
       <button class="edgebutton" @click="removeEdges(id)">×</button>
     </div>
   </EdgeLabelRenderer>
 </template>
+
+<style scoped>
+.edgebutton {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+</style>

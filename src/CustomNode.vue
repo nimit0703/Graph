@@ -2,26 +2,17 @@
   <div :class="['custom-node', { 'selected-node': isSelected }]">
     {{ data.label }}
     <div v-if="isSelected" class="selection-indicator"></div>
-    
-    <!-- Customized Handle for the source (bottom) -->
-    <Handle
-      id="custom-source"
-      type="source"
-      position="bottom"
-      :style="{ width: '15px', height: '15px', background: '#1dfa9e', border: '2px solid #333', borderRadius: '50%' }"
-    >
+
+    <Handle id="custom-source" type="source" position="bottom"
+      @mousedown="console.log('source handle clicked')">
       <span class="handle-label">⬇</span>
     </Handle>
-    
-    <!-- Customized Handle for the target (top) -->
-    <Handle
-      id="custom-target"
-      type="target"
-      position="top"
-      :style="{ width: '15px', height: '15px', background: '#ff6347', border: '2px solid #333', borderRadius: '50%' }"
-    >
+
+    <Handle id="custom-target" type="target" position="top"
+      @mousedown="console.log('target handle clicked')">
       <span class="handle-label">⬆</span>
     </Handle>
+
   </div>
 </template>
 
@@ -70,11 +61,11 @@ const isSelected = computed(() => flowStore.selectedNode === props.id);
 }
 
 .handle-label {
-  font-size: 12px;
+  /* font-size: 12px;
   color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
 </style>

@@ -37,11 +37,18 @@ export const useFlowStore = defineStore("flowStore", () => {
     nodes.value = [...nodes.value, newNode];
   };
 
-  const updateNode = (id,data) =>{
-    // find node from nodes and update it's data
-    const node = nodes.value.find((node) => node.id === id);
-    if (node) node.data = data;
-  }
+  const updateNode = (id, data) => {
+    console.log(`Updating node ${id} with new data:`, data);
+    const nodeIndex = nodes.value.findIndex((node) => node.id === id);
+    if (nodeIndex !== -1) {
+      nodes.value[nodeIndex] = {
+        ...nodes.value[nodeIndex], 
+        data: { ...data } 
+      };
+      nodes.value = [...nodes.value]; 
+    }
+  };
+  
 
   const deleteNode = () => {
     if (selectedNode.value) {
